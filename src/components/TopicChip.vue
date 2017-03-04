@@ -14,8 +14,13 @@ export default {
 </script>
 
 <style scoped>
+  .chip{
+    border-radius: 0px;
+    font-size: 18px;
+    margin-left: 7px;
+  }
   .chip:hover {
-    background-color: #26a69a;
+    background-color: #d32f2f;
     color: #fff;
   }
 </style>
