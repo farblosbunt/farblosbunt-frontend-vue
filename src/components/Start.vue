@@ -19,11 +19,11 @@
       <div class="container">
         <h1>FARBLOS<span class="h1color" style="color:#d32f2f">BUNT</span></h1>
         <h5>WAS</h5>
-        <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        <p>Ein Tool zur besseren Meinungsbildung. Wir stellen Postings von Facebook und somit Meinungen von „linken“ und „rechten“ Medien gegenüber. Und Du brichst dadurch aus deiner (Meinungs-)Filterbubble aus.
         </p>
         <h5>WARUM</h5>
         <p>
-          Lorem ipsum dolor sit amet, eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          Wir alle bewegen uns in sogenannten Filterbubbles. Egal ob gewollt oder nicht, egal ob bewusst oder nicht. Aber genau diese Eingrenzungen sind gefährlich. Sie verleiten uns dazu, nur Medien zu konsumieren, die unsere eigene Meinung bestärken. Das wollen wir mit diesem Tool aufbrechen.
         </p>
       </div>
     </div>
