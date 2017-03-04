@@ -1,10 +1,12 @@
 <template>
   <div id="feed">
     <nav>
-      <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
-        <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
-        <input placeholder="SUCHE" v-model="query" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
-      </div>
+      <router-link :to="{ name: 'Start' }">
+        <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
+          <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
+          <input placeholder="SUCHE" v-model="query" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
+        </div>
+      </router-link>
     </nav>
     <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
       <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
