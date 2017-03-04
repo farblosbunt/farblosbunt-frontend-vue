@@ -33,8 +33,11 @@ export default {
         this.posts = posts
         console.log(posts)
       }).then(() => {
+        // TODO!!!
         /* eslint-disable */
-        FB.XFBML.parse();
+        if (FB !== undefined) {
+          FB.XFBML.parse();
+        }
         /* eslint-enable */
       })
     }

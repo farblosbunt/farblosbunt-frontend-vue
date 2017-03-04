@@ -3,7 +3,7 @@
     <nav>
     <div class="nav-wrapper" style="background-color:#f5f5f5">
       <img src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
-      <input placeholder="SUCHE" type="search" style="width:350px; text-align: center; font-size: 25px">
+      <input placeholder="SUCHE" v-model="query" type="search" style="width:350px; text-align: center; font-size: 25px">
     </div>
   </nav>
     <div class="row">
@@ -21,10 +21,23 @@ export default {
   components: {
     FeedStream
   },
-  props: ['topic'],
+  props: ['term'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      query: ''
+    }
+  },
+  mounted: function () {
+    this.onTermChanged()
+  },
+  watch: {
+    'term': function () {
+      this.onTermChanged()
+    }
+  },
+  methods: {
+    onTermChanged: function () {
+      this.query = String(this.term).replace('-', ' ')
     }
   }
 }
