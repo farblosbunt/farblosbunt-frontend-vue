@@ -1,13 +1,13 @@
 <template>
   <div id="feed-stream">
     <div class="feed" :class="feedTypeClass">
-      <embedded-facebook :postUrl="post.permalink" :postType="post.type" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
+      <embedded-facebook :postUrl="post.permalink_url" :postType="post.type" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
     </div>
   </div>
 </template>
 
 <script>
-import { getFacebookPosts } from '../api/mock/facebookPosts'
+import { getFacebookPosts } from '../api/search'
 import EmbeddedFacebook from './EmbeddedFacebook'
 
 export default {
@@ -15,24 +15,35 @@ export default {
   components: {
     EmbeddedFacebook
   },
-  props: ['feedType'],
+  props: ['feedType', 'query'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       posts: []
     }
   },
   mounted: function () {
-    this.setFacebookPosts()
+    this.performQuery()
+  },
+  watch: {
+    'query': function () {
+      this.performQuery()
+    }
   },
   methods: {
-    setFacebookPosts: function () {
-      this.posts = []
-      getFacebookPosts().then((posts) => {
-        this.posts = posts
-        console.log(posts)
-      }).then(() => {
-        // TODO!!!
+    performQuery: function () {
+      if (this.query !== '') {
+        if (this.feedType === 'liberal') {
+          this.setFacebookPosts('left', this.query)
+        } else {
+          this.setFacebookPosts('right', this.query)
+        }
+      }
+    },
+    setFacebookPosts: function (feedType, query) {
+      getFacebookPosts(feedType, query).then((posts) => {
+        this.posts = posts.data.result
+      })
+      .then(() => {
         /* eslint-disable */
         if (FB !== undefined) {
           FB.XFBML.parse();
