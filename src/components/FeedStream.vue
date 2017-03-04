@@ -1,13 +1,18 @@
 <template>
   <div id="feed-stream">
-    <div class="feed" :class="feedTypeClass">
-      <embedded-facebook :postUrl="post.permalink_url" :postType="post.type" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
+    <div class="feed" :class="orientationClass">
+      <embedded-facebook 
+        :embeddingUrl="element.permalink_url"
+        :elementType="element.type"
+        v-for="element in elements"
+        :key="element.id" 
+        class="embedded facebook">
+      </embedded-facebook>
     </div>
   </div>
 </template>
 
 <script>
-import { getFacebookPosts } from '../api/search'
 import EmbeddedFacebook from './EmbeddedFacebook'
 
 export default {
@@ -15,49 +20,18 @@ export default {
   components: {
     EmbeddedFacebook
   },
-  props: ['feedType', 'query'],
+  props: ['politicalOrientation', 'elements'],
   data () {
     return {
       posts: []
     }
   },
-  mounted: function () {
-    this.performQuery()
-  },
-  watch: {
-    'query': function () {
-      this.performQuery()
-    }
-  },
-  methods: {
-    performQuery: function () {
-      if (this.query !== '') {
-        if (this.feedType === 'liberal') {
-          this.setFacebookPosts('left', this.query)
-        } else {
-          this.setFacebookPosts('right', this.query)
-        }
-      }
-    },
-    setFacebookPosts: function (feedType, query) {
-      getFacebookPosts(feedType, query).then((posts) => {
-        this.posts = posts.data.result
-      })
-      .then(() => {
-        /* eslint-disable */
-        if (FB !== undefined) {
-          FB.XFBML.parse();
-        }
-        /* eslint-enable */
-      })
-    }
-  },
   computed: {
-    feedTypeClass: function () {
-      if (this.feedType === 'liberal') {
-        return 'liberal'
+    orientationClass: function () {
+      if (this.politicalOrientation === 'left-oriented') {
+        return 'left-oriented'
       } else {
-        return 'conservative'
+        return 'right-oriented'
       }
     }
   }
@@ -67,16 +41,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .feed {
-  height: 500px;
+  min-height: 1000px;
   padding: 25px;
 }
 
-.feed.liberal {
+.feed.left-oriented {
   background-color: #d32f2f;
   height: 100%;
 }
 
-.feed.conservative {
+.feed.right-oriented {
   background-color: #424242;
   height: 100%;
 }
