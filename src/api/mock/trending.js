@@ -1,9 +1,9 @@
 let trending = [
-  { id: 1, term: 'donald-trump', name: 'Donald Trump' },
-  { id: 2, term: 'america-first', name: 'America First' },
-  { id: 3, term: 'woldbergs', name: 'Wolbergs' },
-  { id: 4, term: 'untersuchungshaft', name: 'Untersuchungshaft' },
-  { id: 5, term: 'martin-schulz', name: 'Gottkanzler' }
+  { id: 1, term: 'Agenda-2010', name: 'Agenda 2010' },
+  { id: 2, term: 'Martin-Schulz', name: 'Martin Schulz' },
+  { id: 3, term: 'Donald-Trump', name: 'Donald Trump' },
+  { id: 4, term: 'Türkei', name: 'Türkei' },
+  { id: 5, term: 'Aschermittwoch', name: 'Aschermittwoch' }
 ]
 
 function getTrendingTopics () {

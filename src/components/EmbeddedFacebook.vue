@@ -1,11 +1,11 @@
 <template>
   <div id="embedded-facebook">
-    <div class="fb-post" :data-href="postUrl" v-if="postType === 'link' || postType === 'photo'"></div>
+    <div class="fb-post" :data-href="embeddingUrl" v-if="elementType === 'link' || elementType === 'photo'"></div>
     <div class="fb-video"
-      :data-href="postUrl"
+      :data-href="embeddingUrl"
       data-show-text="true"
       data-show-captions="true" 
-      v-else-if="postType === 'video'"></div>
+      v-else-if="elementType === 'video'"></div>
     <div v-else>Unbekannte Embedding Art 😔</div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: 'embedded-facebook',
-  props: ['postUrl', 'postType']
+  props: ['embeddingUrl', 'elementType']
 }
 </script>
 
