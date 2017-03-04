@@ -1,11 +1,12 @@
 <template>
   <div id="embedded-facebook">
-    <div class="fb-post" :data-href="embeddingUrl" v-if="elementType === 'link' || elementType === 'photo'"></div>
+    <div class="fb-post" :data-href="embeddingUrl" v-if="elementType === 'link' || elementType === 'photo'" style="background-color: white;border-radius: 3px"></div>
     <div class="fb-video"
       :data-href="embeddingUrl"
       data-show-text="true"
-      data-show-captions="true" 
-      v-else-if="elementType === 'video'"></div>
+      data-show-captions="true"
+      v-else-if="elementType === 'video'"
+      style="background-color: white; width:550px !important; border-radius: 3px"></div>
     <div v-else>Unbekannte Embedding Art 😔</div>
   </div>
 </template>
