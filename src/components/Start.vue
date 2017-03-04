@@ -6,7 +6,7 @@
         <img class="logo" alt="logo" src="../assets/logo.png">
       </div>
       <div class="col l12" style="padding: 20px">
-        <input placeholder="SUCHE" type="search" style="width:350px; text-align: center; font-size: 25px">
+        <input placeholder="SUCHE" type="search" class="search" v-model="query" v-on:keyup.enter="search">
       </div>
       <div class="col l12">
         <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
@@ -29,7 +29,8 @@ export default {
   },
   data () {
     return {
-      trendingTopics: []
+      trendingTopics: [],
+      query: ''
     }
   },
   mounted: function () {
@@ -41,6 +42,13 @@ export default {
       getTrendingTopics().then((trendingTopics) => {
         this.trendingTopics = trendingTopics
       })
+    },
+    search: function () {
+      if (this.query !== '') {
+        // Query is not empty
+        this.query = String(this.query).replace(' ', '-')
+        this.$router.push({ name: 'Feed', params: { term: this.query } })
+      }
     }
   }
 }
@@ -73,6 +81,12 @@ export default {
   margin-right: auto;
   width: /*whatever width you want*/
   ;
+}
+
+.search {
+  width:350px; 
+  text-align: center; 
+  font-size: 25px;
 }
 
 .input-field input[type=text]:focus {
