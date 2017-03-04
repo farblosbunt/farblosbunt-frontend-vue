@@ -1,14 +1,16 @@
 <template>
   <div id="feed">
     <nav>
-    <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
-      <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
-      <input placeholder="SUCHE" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
+      <router-link :to="{ name: 'Start' }">
+        <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
+          <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
+          <input placeholder="SUCHE" v-model="query" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
+        </div>
+      </router-link>
+    </nav>
+    <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
+      <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
     </div>
-  </nav>
-  <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
-    <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
-  </div>
     <div class="row">
       <feed-stream feedType="liberal" class="col s6 no-padding center-align"></feed-stream>
       <feed-stream feedType="conservative" class="col s6 no-padding center-align"></feed-stream>
@@ -29,16 +31,26 @@ export default {
     FeedStream,
     TopicChip
   },
-  props: ['topic'],
+  props: ['term'],
   data () {
     return {
+      query: '',
       trendingTopics: []
     }
   },
   mounted: function () {
     this.setTrendingTopics()
+    this.onTermChanged()
+  },
+  watch: {
+    'term': function () {
+      this.onTermChanged()
+    }
   },
   methods: {
+    onTermChanged: function () {
+      this.query = String(this.term).replace('-', ' ')
+    },
     setTrendingTopics: function () {
       this.trendingTopics = []
       getTrendingTopics().then((trendingTopics) => {
