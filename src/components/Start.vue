@@ -1,17 +1,33 @@
 <template>
 <div id="start" class="container center outer">
   <div class="middle">
-    <div class="inner row">
-      <div class="col l12">
-        <img class="logo" alt="logo" src="../assets/logo.png">
-      </div>
-      <div class="col l12" style="padding: 20px">
-        <input placeholder="SUCHE" type="search" class="search" v-model="query" v-on:keyup.enter="search">
-      </div>
-      <div class="col l12">
-        <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
+    <div class="row valign-wrapper">
+    <div class="col l6">
+      <div class="inner row">
+        <div class="col l12">
+          <img class="logo" alt="logo" src="../assets/logo.png">
+        </div>
+        <div class="col l12" style="padding: 20px">
+          <input placeholder="SUCHE" type="search" class="search" v-model="query" v-on:keyup.enter="search">
+        </div>
+        <div class="col l12">
+          <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
+        </div>
       </div>
     </div>
+    <div class="col l6 valign-wrapper" style="height:100vh; margin-bottom:-20px;background-color:#f5f5f5">
+      <div class="container">
+        <h1>FARBLOS<span class="h1color" style="color:#d32f2f">BUNT</span></h1>
+        <h5>WAS</h5>
+        <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+        <h5>WARUM</h5>
+        <p>
+          Lorem ipsum dolor sit amet, eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 </template>
@@ -84,8 +100,8 @@ export default {
 }
 
 .search {
-  width:350px; 
-  text-align: center; 
+  width:350px;
+  text-align: center;
   font-size: 25px;
 }
 
@@ -93,4 +109,8 @@ export default {
       border-bottom: 1px solid #000;
       box-shadow: 0 1px 0 0 #000;
     }
+
+.h1color h1{
+  color:#d32f2f;
+}
 </style>

@@ -28,10 +28,13 @@ export default {
   }
 }
 </script>
-
 <style src="../static/materialize/css/materialize.min.css"></style>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <style>
-body{
+html,
+body {
+  height: 100%;
+  min-height: 100%;
   background-color: #f5f5f5;
 }
 </style>
