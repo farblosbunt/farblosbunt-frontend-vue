@@ -1,46 +1,59 @@
 <template>
   <div id="feed">
+    <!-- Nav -->
     <nav>
-      <router-link :to="{ name: 'Start' }">
-        <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
+      <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
+        <router-link :to="{ name: 'Start' }">
           <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
-          <input placeholder="SUCHE" v-model="query" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
-        </div>
-      </router-link>
+        </router-link>
+        <input placeholder="SUCHE" v-model="query" v-on:keyup.enter="search" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
+      </div>
     </nav>
+    <!-- ./Nav -->
+    <!-- TrendingTopics -->
     <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
       <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
     </div>
+    <!-- ./TrendingTopics -->
     <div class="row">
-      <feed-stream feedType="liberal" :query="term" class="col s6 no-padding center-align"></feed-stream>
-      <feed-stream feedType="conservative" :query="term" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" class="col s6 no-padding center-align"></feed-stream>
     </div>
+    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" spinner="waveDots"></infinite-loading>
   </div>
 </template>
 
 <script>
 import FeedStream from './FeedStream'
-import {
-  getTrendingTopics
-} from '../api/mock/trending.js'
+import { getTrendingTopics } from '../api/mock/trending.js'
+import { getFacebookPosts } from '../api/search'
 import TopicChip from './TopicChip'
+import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   name: 'feed',
   components: {
+    TopicChip,
     FeedStream,
-    TopicChip
+    InfiniteLoading
   },
   props: ['term'],
   data () {
     return {
       query: '',
-      trendingTopics: []
+      trendingTopics: [],
+      leftOrientedElements: [],
+      rightOrientedElements: [],
+      offset: 0
     }
   },
   mounted: function () {
+    // Set Trending Topics
     this.setTrendingTopics()
-    this.onTermChanged()
+    // Set Query
+    this.setQuery()
+    // Load Initial Facebook Posts
+    this.setFacebookPosts()
   },
   watch: {
     'term': function () {
@@ -49,12 +62,60 @@ export default {
   },
   methods: {
     onTermChanged: function () {
+      // Term Changed, reset query
+      this.setQuery()
+      // Reset Facebook Posts and Offset
+      this.leftOrientedElements = []
+      this.rightOrientedElements = []
+      this.offset = 0
+      // Load first offset of new FacebookPosts
+      this.setFacebookPosts()
+    },
+    setQuery: function () {
       this.query = String(this.term).replace('-', ' ')
+    },
+    search: function () {
+      if (this.query !== '') {
+        // Query is not empty
+        this.query = String(this.query).replace(' ', '-')
+        this.$router.push({ name: 'Feed', params: { term: this.query } })
+      }
     },
     setTrendingTopics: function () {
       this.trendingTopics = []
       getTrendingTopics().then((trendingTopics) => {
         this.trendingTopics = trendingTopics
+      })
+    },
+    onInfinite: function () {
+      // Infinite Loading
+      this.setFacebookPosts()
+    },
+    setFacebookPosts: function () {
+      console.log('set facebook posts')
+      // set Facebook Posts
+      Promise.all([
+        getFacebookPosts('left', this.query, this.offset),
+        getFacebookPosts('right', this.query, this.offset)
+      ]).then((responses) => {
+        // Left oriented posts
+        this.leftOrientedElements = this.leftOrientedElements.concat(responses[0].data.result)
+        console.log(this.leftOrientedElements)
+        return responses
+      }).then((responses) => {
+        // Right oriented posts
+        this.rightOrientedElements = this.rightOrientedElements.concat(responses[1].data.result)
+      }).then(() => {
+        // Reload embedded Facebook Posts
+        // Only on Reload etc. TODO!
+        /* eslint-disable */
+        FB.XFBML.parse();
+        /* eslint-enable */
+      }).then(() => {
+        // Set offset
+        this.offset++
+      }).then(() => {
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
       })
     }
   }
