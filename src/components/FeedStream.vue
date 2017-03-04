@@ -1,7 +1,7 @@
 <template>
   <div id="feed-stream">
     <div class="feed" :class="feedTypeClass">
-      <embedded-facebook :postUrl="post.permalink" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
+      <embedded-facebook :postUrl="post.permalink" :postType="post.type" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
     </div>
   </div>
 </template>
