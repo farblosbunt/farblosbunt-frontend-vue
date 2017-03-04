@@ -12,8 +12,8 @@
       <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
     </div>
     <div class="row">
-      <feed-stream feedType="liberal" class="col s6 no-padding center-align"></feed-stream>
-      <feed-stream feedType="conservative" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream feedType="liberal" :query="term" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream feedType="conservative" :query="term" class="col s6 no-padding center-align"></feed-stream>
     </div>
   </div>
 </template>

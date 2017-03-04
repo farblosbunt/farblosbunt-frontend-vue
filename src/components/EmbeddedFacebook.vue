@@ -1,6 +1,6 @@
 <template>
   <div id="embedded-facebook">
-    <div class="fb-post" :data-href="postUrl" v-if="postType === 'post'"></div>
+    <div class="fb-post" :data-href="postUrl" v-if="postType === 'link' || postType === 'photo'"></div>
     <div class="fb-video"
       :data-href="postUrl"
       data-show-text="true"
