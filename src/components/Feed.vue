@@ -1,30 +1,49 @@
 <template>
   <div id="feed">
     <nav>
-    <div class="nav-wrapper" style="background-color:#f5f5f5">
-      <img src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
-      <input placeholder="SUCHE" type="search" style="width:350px; text-align: center; font-size: 25px">
+    <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
+      <img class="left" src="../assets/logo.png" height="40px" style="margin-left:20px; margin-top: 10px">
+      <input placeholder="SUCHE" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
     </div>
   </nav>
+  <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
+    <topic-chip v-for="topic in trendingTopics" :topic="topic" :key="topic.id"></topic-chip>
+  </div>
     <div class="row">
-      <feed-stream feedType="liberal" class="col s6 no-padding"></feed-stream>
-      <feed-stream feedType="conservative" class="col s6 no-padding"></feed-stream>
+      <feed-stream feedType="liberal" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream feedType="conservative" class="col s6 no-padding center-align"></feed-stream>
     </div>
   </div>
 </template>
 
 <script>
 import FeedStream from './FeedStream'
+import {
+  getTrendingTopics
+} from '../api/mock/trending.js'
+import TopicChip from './TopicChip'
 
 export default {
   name: 'feed',
   components: {
-    FeedStream
+    FeedStream,
+    TopicChip
   },
   props: ['topic'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      trendingTopics: []
+    }
+  },
+  mounted: function () {
+    this.setTrendingTopics()
+  },
+  methods: {
+    setTrendingTopics: function () {
+      this.trendingTopics = []
+      getTrendingTopics().then((trendingTopics) => {
+        this.trendingTopics = trendingTopics
+      })
     }
   }
 }
