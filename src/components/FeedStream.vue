@@ -1,6 +1,5 @@
 <template>
   <div id="feed-stream">
-    <button v-on:click="setFacebookPosts()">Neu laden ...</button>
     <div class="feed" :class="feedTypeClass">
       <embedded-facebook :postUrl="post.permalink" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
     </div>
@@ -62,11 +61,13 @@ export default {
 }
 
 .feed.liberal {
-  background-color: #c62828; 
+  background-color: #d32f2f;
+  height: 100%;
 }
 
 .feed.conservative {
-  background-color: #616161; 
+  background-color: #424242;
+  height: 100%;
 }
 
 .embedded {
