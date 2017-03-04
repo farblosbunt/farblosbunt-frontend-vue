@@ -1,5 +1,5 @@
 <template>
-  <div id="hello" class="center">
+  <div id="hello body" class="center">
     <h1>Logo</h1>
     <input placeholder="Suche ..." type="search">
     <div class="chip" v-for="topic in trending">

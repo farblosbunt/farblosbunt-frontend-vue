@@ -1,4 +1,4 @@
-<template>
+<template class="body">
   <div id="start" class="container center">
     <h1>Logo</h1>
     <input placeholder="Suche ..." type="search">
@@ -35,4 +35,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+</style>
