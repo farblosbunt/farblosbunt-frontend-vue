@@ -1,16 +1,42 @@
 <template>
   <div id="feed-stream">
-    <div class="feed" :class="feedTypeClass">1</div>
+    <button v-on:click="setFacebookPosts()">Neu laden ...</button>
+    <div class="feed" :class="feedTypeClass">
+      <embedded-facebook :postUrl="post.permalink" v-for="post in posts" :key="post.id" class="embedded facebook"></embedded-facebook>
+    </div>
   </div>
 </template>
 
 <script>
+import { getFacebookPosts } from '../api/mock/facebookPosts'
+import EmbeddedFacebook from './EmbeddedFacebook'
+
 export default {
   name: 'feed-stream',
+  components: {
+    EmbeddedFacebook
+  },
   props: ['feedType'],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      posts: []
+    }
+  },
+  mounted: function () {
+    this.setFacebookPosts()
+  },
+  methods: {
+    setFacebookPosts: function () {
+      this.posts = []
+      getFacebookPosts().then((posts) => {
+        this.posts = posts
+        console.log(posts)
+      }).then(() => {
+        /* eslint-disable */
+        FB.XFBML.parse();
+        /* eslint-enable */
+      })
     }
   },
   computed: {
@@ -38,5 +64,9 @@ export default {
 
 .feed.conservative {
   background-color: #616161; 
+}
+
+.embedded {
+  margin-bottom: 10px;
 }
 </style>
