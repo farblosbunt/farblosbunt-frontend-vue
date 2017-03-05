@@ -7,9 +7,10 @@
       data-show-captions="true"
       v-else-if="elementType === 'video'"
       style="background-color: white; border-radius: 3px"></div>
-    <div v-else>Unbekannte Embedding Art 😔</div>
   </div>
 </template>
+
+<!-- <div v-else>Unbekannte Embedding Art 😔 {{ elementType }}</div> -->
 
 <script>
 export default {

@@ -18,8 +18,8 @@
     </div>
     <!-- ./TrendingTopics -->
     <div class="row">
-      <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" class="col s6 no-padding center-align"></feed-stream>
-      <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" :spinner="loading" class="col s6 no-padding center-align"></feed-stream>
+      <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" :spinner="loading" class="col s6 no-padding center-align"></feed-stream>
     </div>
     <div class="row center-align">
       <a class="waves-effect waves-light btn red darken-2" v-on:click="onInfinite"><i class="material-icons left"></i>Weitere Laden</a>
@@ -46,6 +46,7 @@ export default {
       trendingTopics: [],
       leftOrientedElements: [],
       rightOrientedElements: [],
+      loading: false,
       offset: 0
     }
   },
@@ -94,7 +95,8 @@ export default {
       this.setFacebookPosts()
     },
     setFacebookPosts: function () {
-      console.log('set facebook posts')
+      // Show a spinner
+      this.loading = true
       // set Facebook Posts
       Promise.all([
         getFacebookPosts('left', this.query, this.offset),
@@ -107,6 +109,9 @@ export default {
       }).then((responses) => {
         // Right oriented posts
         this.rightOrientedElements = this.rightOrientedElements.concat(responses[1].data.result)
+      }).then(() => {
+        // Unshow Spinner
+        this.loading = false
       }).then(() => {
         // Reload embedded Facebook Posts
         // Only on Reload etc. TODO!
