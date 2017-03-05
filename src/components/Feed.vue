@@ -19,6 +19,9 @@
       <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" class="col s6 no-padding center-align"></feed-stream>
       <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" class="col s6 no-padding center-align"></feed-stream>
     </div>
+    <div class="row">
+      <a class="waves-effect waves-light btn" v-on:click="onInfinite"><i class="material-icons left">replay</i>weitere laden</a>
+    </div>
   </div>
 </template>
 
