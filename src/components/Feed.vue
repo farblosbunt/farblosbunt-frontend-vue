@@ -1,6 +1,7 @@
 <template>
   <div id="feed">
     <!-- Nav -->
+    <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper center-align" style="background-color:#f5f5f5">
         <router-link :to="{ name: 'Start' }">
@@ -9,6 +10,7 @@
         <input placeholder="SUCHE" v-model="query" v-on:keyup.enter="search" type="search" style="margin-top:0px; width:350px; text-align: center; font-size: 25px; color:black; margin:auto">
       </div>
     </nav>
+    </div>
     <!-- ./Nav -->
     <!-- TrendingTopics -->
     <div class="col l12 center-align" style="margin-top:20px; margin-bottom:15px">
@@ -19,8 +21,8 @@
       <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" class="col s6 no-padding center-align"></feed-stream>
       <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" class="col s6 no-padding center-align"></feed-stream>
     </div>
-    <div class="row">
-      <a class="waves-effect waves-light btn" v-on:click="onInfinite"><i class="material-icons left">replay</i>weitere laden</a>
+    <div class="row center-align">
+      <a class="waves-effect waves-light btn red darken-2" v-on:click="onInfinite"><i class="material-icons left"></i>Weitere Laden</a>
     </div>
   </div>
 </template>
