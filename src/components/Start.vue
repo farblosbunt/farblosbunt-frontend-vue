@@ -27,7 +27,7 @@
         </p>
         <h5>WIE</h5>
         <p>
-          Insgesamt durchsuchen wir die Posts auf Facebook von ca. 40 deutschen Meinungsmachern, quer durch die politsche Landschaft. Dabei werden diese in extrem links, links, neutral, rechts und extrem rechts eingeteilt. <br><a href="http://www.polisphere.eu/wp-content/uploads/2017/02/medienlandschaftskarte_v2.pdf" style="color:#d32f2f">Zur Auflistung</a>
+          Insgesamt durchsuchen wir die Posts auf Facebook von ca. 40 deutschen Meinungsmachern, quer durch die politsche Landschaft. Dabei werden diese in extrem links, links, neutral, rechts und extrem rechts eingeteilt. <br><a href="http://www.polisphere.eu/wp-content/uploads/2017/02/medienlandschaftskarte_v2.pdf" style="color:#d32f2f" target="_blank">Zur Auflistung</a>
         </p>
       </div>
     </div>
