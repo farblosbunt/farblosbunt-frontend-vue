@@ -19,7 +19,6 @@
       <feed-stream politicalOrientation="left-oriented" :elements="leftOrientedElements" class="col s6 no-padding center-align"></feed-stream>
       <feed-stream politicalOrientation="right-oriented" :elements="rightOrientedElements" class="col s6 no-padding center-align"></feed-stream>
     </div>
-    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" spinner="waveDots"></infinite-loading>
   </div>
 </template>
 
@@ -28,14 +27,12 @@ import FeedStream from './FeedStream'
 import { getTrendingTopics } from '../api/mock/trending.js'
 import { getFacebookPosts } from '../api/search'
 import TopicChip from './TopicChip'
-import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   name: 'feed',
   components: {
     TopicChip,
-    FeedStream,
-    InfiniteLoading
+    FeedStream
   },
   props: ['term'],
   data () {
@@ -114,8 +111,6 @@ export default {
       }).then(() => {
         // Set offset
         this.offset++
-      }).then(() => {
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
       })
     }
   }
