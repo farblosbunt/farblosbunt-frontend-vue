@@ -3,7 +3,7 @@ let trending = [
   { id: 2, term: 'Martin-Schulz', name: 'Martin Schulz' },
   { id: 3, term: 'Donald-Trump', name: 'Donald Trump' },
   { id: 4, term: 'Türkei', name: 'Türkei' },
-  { id: 5, term: 'Aschermittwoch', name: 'Aschermittwoch' }
+  { id: 5, term: 'AfD', name: 'AfD' }
 ]
 
 function getTrendingTopics () {
